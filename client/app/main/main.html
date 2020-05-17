@@ -1,0 +1,19 @@
+<div class="container">
+    <h1 class="page-header">Videos Logs:</h1>
+    <div class="flex-row">
+        <div class="flex-column" *ngFor="let videosLogItemsChunk of videosLogItemsChunks">
+          <div class="flex-item" *ngFor="let videosLogItem of videosLogItemsChunk">
+            <video [src]="videosLogItem.video_url" controls="controls" [poster]="videosLogItem.thumb_url" (error)="videosLogItem.noVideo = true" *ngIf="videosLogItem.video_url">
+            </video>
+            <iframe [src]="sanitizer.bypassSecurityTrustResourceUrl(videosLogItem.embed_code || (videosLogItem.platform === 'yt' && 'https://www.youtube.com/embed/' + videosLogItem.video_id.replace('yt.', '')) || (videosLogItem.platform === 'fb' && 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent('https://www.facebook.com/' + videosLogItem.video_id.replace('fb.', '').replace('.', '\/videos\/'))))" (error)="videosLogItem.noIframe = true" *ngIf="!videosLogItem.video_url">
+            </iframe>
+            <div *ngIf="videosLogItem.noVideo && videosLogItem.noIframe">
+              Sorry, cannt show video (id: {{ videosLogItem.id }})
+            </div>
+            <b>{{ videosLogItem.title }}</b><br>
+            {{ videosLogItem.duration | time }}<br>
+            {{ videosLogItem.published }}
+          </div>
+        </div>
+    </div>
+</div>

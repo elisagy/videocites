@@ -1,0 +1,55 @@
+.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.flex-column {
+    flex: calc(33.33333333% - 2em);
+    max-width: calc(33.33333333% - 2em);
+    padding: 0 4px;
+
+    .flex-item {
+        border-radius: 0.25em;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        margin: 1em 0;
+        padding: 1em;
+        transition: 0.3s;
+        vertical-align: middle;
+        width: 100%;
+
+        &:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        video,
+        iframe {
+            width: 100%;
+        }
+    }
+}
+
+iframe {
+    background-image: url('/assets/images/ad27atzy1zxz.gif');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: none;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+    .flex-column {
+        flex: 50%;
+        max-width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .flex-column {
+        flex: 100%;
+        max-width: 100%;
+    }
+}
